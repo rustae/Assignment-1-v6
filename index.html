@@ -1,0 +1,956 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <link rel="stylesheet" href="css/leaflet.css" />
+    
+    <link rel="stylesheet" type="text/css" href="css/qgis2web.css">
+    <link rel="stylesheet" href="css/label.css" />
+    
+    <link rel="stylesheet" href="css/MarkerCluster.css" />
+    <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+    
+    <link rel="stylesheet" href=http://k4r573n.github.io/leaflet-control-osm-geocoder/Control.OSMGeocoder.css" />
+    
+    
+    
+    
+    
+        <script src="js/leaflet.js"></script>
+    
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/label.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+    
+    <script src="http://k4r573n.github.io/leaflet-control-osm-geocoder/Control.OSMGeocoder.js"></script>
+    
+    
+    
+    <script src="./resources/Autolinker.min.js"></script>
+    
+    
+        <script src="js/leaflet.markercluster.js"></script>
+    
+    
+     
+    <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+    <title></title>
+  </head>
+  <body>
+    <div id="map">
+        
+    </div>
+    
+        <script src="data/json_Transport.js"></script>
+        <script src="data/json_Education.js"></script>
+        <script src="data/json_Clinics.js"></script>
+        <script src="data/json_Eldercare.js"></script>
+        <script src="data/json_Childcare.js"></script>
+        <script src="data/json_Groceries.js"></script>
+        <script src="data/json_SubzoneDemographics65Older.js"></script>
+        <script src="data/json_SubzoneDemographics5564.js"></script>
+        <script src="data/json_SubzoneDemographics2554.js"></script>
+        <script src="data/json_SubzoneDemographics1524.js"></script>
+        <script src="data/json_SubzoneDemographics014.js"></script>
+        <script src="data/json_SubzoneDemographicsTotal.js"></script>
+        <script src="data/json_MRTLines.js"></script>
+        <script src="data/json_LRTLines.js"></script>
+        <script src="data/json_a1proportionalcirclesrealisPOI.js"></script>
+        <script>
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        })
+        var hash = new L.Hash(map);
+        var additional_attrib = '<a href="https://github.com/tomchadwin/qgis2web" target ="_blank">qgis2web</a>';
+        var feature_group = new L.featureGroup([]);
+        var bounds_group = new L.featureGroup([]);
+        var raster_group = new L.LayerGroup([]);
+        var layerOrder = new Array();
+        function stackLayers() {
+            for (index = 0; index < layerOrder.length; index++) {
+                map.removeLayer(layerOrder[index]);
+                map.addLayer(layerOrder[index]);
+            }
+            map.fitBounds(bounds_group.getBounds());
+        }
+        function restackLayers() {
+            for (index = 0; index < layerOrder.length; index++) {
+                layerOrder[index].bringToFront();
+            }
+        }
+        map.on('overlayadd', restackLayers);
+        layerControl = L.control.layers({},{},{collapsed:false});
+        function pop_Transport(feature, layer) {
+        }
+
+        var svgTransport = L.icon({
+            iconUrl: 'markers/transport_train_station2.svg',
+            iconSize: [19.76, 19.76], // size of the icon
+        });
+
+        function doStyleTransport() {
+            return {
+                icon: svgTransport
+            }
+        }
+        function doPointToLayerTransport(feature, latlng) {
+            return L.marker(latlng, doStyleTransport())
+        }
+        var json_TransportJSON = new L.geoJson(json_Transport, {
+            onEachFeature: pop_Transport, 
+            pointToLayer: doPointToLayerTransport
+            });
+        layerOrder[layerOrder.length] = json_TransportJSON;
+
+        bounds_group.addLayer(json_TransportJSON);
+        feature_group.addLayer(json_TransportJSON);
+        function pop_Education(feature, layer) {
+        }
+
+        var svgEducation = L.icon({
+            iconUrl: 'markers/shopping_book.svg',
+            iconSize: [9.5, 9.5], // size of the icon
+        });
+
+        function doStyleEducation() {
+            return {
+                icon: svgEducation
+            }
+        }
+        function doPointToLayerEducation(feature, latlng) {
+            return L.marker(latlng, doStyleEducation())
+        }
+        var json_EducationJSON = new L.geoJson(json_Education, {
+            onEachFeature: pop_Education, 
+            pointToLayer: doPointToLayerEducation
+            });
+        layerOrder[layerOrder.length] = json_EducationJSON;
+
+        bounds_group.addLayer(json_EducationJSON);
+        feature_group.addLayer(json_EducationJSON);
+        function pop_Clinics(feature, layer) {
+        }
+
+        var svgClinics = L.icon({
+            iconUrl: 'markers/health_hospital.svg',
+            iconSize: [11.4, 11.4], // size of the icon
+        });
+
+        function doStyleClinics() {
+            return {
+                icon: svgClinics
+            }
+        }
+        function doPointToLayerClinics(feature, latlng) {
+            return L.marker(latlng, doStyleClinics())
+        }
+        var json_ClinicsJSON = new L.geoJson(json_Clinics, {
+            onEachFeature: pop_Clinics, 
+            pointToLayer: doPointToLayerClinics
+            });
+        layerOrder[layerOrder.length] = json_ClinicsJSON;
+
+        bounds_group.addLayer(json_ClinicsJSON);
+        feature_group.addLayer(json_ClinicsJSON);
+        function pop_Eldercare(feature, layer) {
+        }
+
+        var svgEldercare = L.icon({
+            iconUrl: 'markers/blue-marker.svg',
+            iconSize: [26.6, 26.6], // size of the icon
+        });
+
+        function doStyleEldercare() {
+            return {
+                icon: svgEldercare
+            }
+        }
+        function doPointToLayerEldercare(feature, latlng) {
+            return L.marker(latlng, doStyleEldercare())
+        }
+        var json_EldercareJSON = new L.geoJson(json_Eldercare, {
+            onEachFeature: pop_Eldercare, 
+            pointToLayer: doPointToLayerEldercare
+            });
+        layerOrder[layerOrder.length] = json_EldercareJSON;
+
+        bounds_group.addLayer(json_EldercareJSON);
+        feature_group.addLayer(json_EldercareJSON);
+        function pop_Childcare(feature, layer) {
+        }
+
+        var svgChildcare = L.icon({
+            iconUrl: 'markers/red-marker.svg',
+            iconSize: [26.6, 26.6], // size of the icon
+        });
+
+        function doStyleChildcare() {
+            return {
+                icon: svgChildcare
+            }
+        }
+        function doPointToLayerChildcare(feature, latlng) {
+            return L.marker(latlng, doStyleChildcare())
+        }
+        var json_ChildcareJSON = new L.geoJson(json_Childcare, {
+            onEachFeature: pop_Childcare, 
+            pointToLayer: doPointToLayerChildcare
+            });
+        layerOrder[layerOrder.length] = json_ChildcareJSON;
+
+        bounds_group.addLayer(json_ChildcareJSON);
+        feature_group.addLayer(json_ChildcareJSON);
+        function pop_Groceries(feature, layer) {
+        }
+
+        var svgGroceries = L.icon({
+            iconUrl: 'markers/shopping_convenience.svg',
+            iconSize: [19.0, 19.0], // size of the icon
+        });
+
+        function doStyleGroceries() {
+            return {
+                icon: svgGroceries
+            }
+        }
+        function doPointToLayerGroceries(feature, latlng) {
+            return L.marker(latlng, doStyleGroceries())
+        }
+        var json_GroceriesJSON = new L.geoJson(json_Groceries, {
+            onEachFeature: pop_Groceries, 
+            pointToLayer: doPointToLayerGroceries
+            });
+        layerOrder[layerOrder.length] = json_GroceriesJSON;
+
+        bounds_group.addLayer(json_GroceriesJSON);
+        feature_group.addLayer(json_GroceriesJSON);
+        function pop_SubzoneDemographics65Older(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_7</th><td>' + (feature.properties['DensityP_7'] !== null ? Autolinker.link(String(feature.properties['DensityP_7'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function doStyleSubzoneDemographics65Older(feature) {
+        if (feature.properties.DensityP_7 >= 0.0 &&
+                feature.properties.DensityP_7 <= 780.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#f7fcf5',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_7 >= 780.0 &&
+                feature.properties.DensityP_7 <= 2170.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#c9e9c2',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_7 >= 2170.0 &&
+                feature.properties.DensityP_7 <= 4000.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#7ac77b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_7 >= 4000.0 &&
+                feature.properties.DensityP_7 <= 8410.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#29924a',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_7 >= 8410.0 &&
+                feature.properties.DensityP_7 <= 14350.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        }
+            var json_SubzoneDemographics65OlderJSON = new L.geoJson(json_SubzoneDemographics65Older, {
+                onEachFeature: pop_SubzoneDemographics65Older,
+                style: doStyleSubzoneDemographics65Older
+            });
+            layerOrder[layerOrder.length] = json_SubzoneDemographics65OlderJSON;
+        bounds_group.addLayer(json_SubzoneDemographics65OlderJSON);
+        feature_group.addLayer(json_SubzoneDemographics65OlderJSON);
+        function pop_SubzoneDemographics5564(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_6</th><td>' + (feature.properties['DensityP_6'] !== null ? Autolinker.link(String(feature.properties['DensityP_6'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function doStyleSubzoneDemographics5564(feature) {
+        if (feature.properties.DensityP_6 >= 0.0 &&
+                feature.properties.DensityP_6 <= 950.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#f7fcf5',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_6 >= 950.0 &&
+                feature.properties.DensityP_6 <= 2940.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#c9e9c2',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_6 >= 2940.0 &&
+                feature.properties.DensityP_6 <= 6060.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#7ac77b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_6 >= 6060.0 &&
+                feature.properties.DensityP_6 <= 13240.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#29924a',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_6 >= 13240.0 &&
+                feature.properties.DensityP_6 <= 21640.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        }
+            var json_SubzoneDemographics5564JSON = new L.geoJson(json_SubzoneDemographics5564, {
+                onEachFeature: pop_SubzoneDemographics5564,
+                style: doStyleSubzoneDemographics5564
+            });
+            layerOrder[layerOrder.length] = json_SubzoneDemographics5564JSON;
+        bounds_group.addLayer(json_SubzoneDemographics5564JSON);
+        feature_group.addLayer(json_SubzoneDemographics5564JSON);
+        function pop_SubzoneDemographics2554(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_5</th><td>' + (feature.properties['DensityP_5'] !== null ? Autolinker.link(String(feature.properties['DensityP_5'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function doStyleSubzoneDemographics2554(feature) {
+        if (feature.properties.DensityP_5 >= 0.0 &&
+                feature.properties.DensityP_5 <= 3170.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#f7fcf5',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_5 >= 3170.0 &&
+                feature.properties.DensityP_5 <= 10650.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#c9e9c2',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_5 >= 10650.0 &&
+                feature.properties.DensityP_5 <= 21790.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#7ac77b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_5 >= 21790.0 &&
+                feature.properties.DensityP_5 <= 37780.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#29924a',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_5 >= 37780.0 &&
+                feature.properties.DensityP_5 <= 62060.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        }
+            var json_SubzoneDemographics2554JSON = new L.geoJson(json_SubzoneDemographics2554, {
+                onEachFeature: pop_SubzoneDemographics2554,
+                style: doStyleSubzoneDemographics2554
+            });
+            layerOrder[layerOrder.length] = json_SubzoneDemographics2554JSON;
+        bounds_group.addLayer(json_SubzoneDemographics2554JSON);
+        feature_group.addLayer(json_SubzoneDemographics2554JSON);
+        function pop_SubzoneDemographics1524(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_4</th><td>' + (feature.properties['DensityP_4'] !== null ? Autolinker.link(String(feature.properties['DensityP_4'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function doStyleSubzoneDemographics1524(feature) {
+        if (feature.properties.DensityP_4 >= 0.0 &&
+                feature.properties.DensityP_4 <= 1560.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#f7fcf5',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_4 >= 1560.0 &&
+                feature.properties.DensityP_4 <= 4480.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#c9e9c2',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_4 >= 4480.0 &&
+                feature.properties.DensityP_4 <= 8190.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#7ac77b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_4 >= 8190.0 &&
+                feature.properties.DensityP_4 <= 14760.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#29924a',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_4 >= 14760.0 &&
+                feature.properties.DensityP_4 <= 21290.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        }
+            var json_SubzoneDemographics1524JSON = new L.geoJson(json_SubzoneDemographics1524, {
+                onEachFeature: pop_SubzoneDemographics1524,
+                style: doStyleSubzoneDemographics1524
+            });
+            layerOrder[layerOrder.length] = json_SubzoneDemographics1524JSON;
+        bounds_group.addLayer(json_SubzoneDemographics1524JSON);
+        feature_group.addLayer(json_SubzoneDemographics1524JSON);
+        function pop_SubzoneDemographics014(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_3</th><td>' + (feature.properties['DensityP_3'] !== null ? Autolinker.link(String(feature.properties['DensityP_3'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function doStyleSubzoneDemographics014(feature) {
+        if (feature.properties.DensityP_3 >= 0.0 &&
+                feature.properties.DensityP_3 <= 1020.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#f7fcf5',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_3 >= 1020.0 &&
+                feature.properties.DensityP_3 <= 3390.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#c9e9c2',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_3 >= 3390.0 &&
+                feature.properties.DensityP_3 <= 7110.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#7ac77b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_3 >= 7110.0 &&
+                feature.properties.DensityP_3 <= 13480.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#29924a',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_3 >= 13480.0 &&
+                feature.properties.DensityP_3 <= 19140.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        }
+            var json_SubzoneDemographics014JSON = new L.geoJson(json_SubzoneDemographics014, {
+                onEachFeature: pop_SubzoneDemographics014,
+                style: doStyleSubzoneDemographics014
+            });
+            layerOrder[layerOrder.length] = json_SubzoneDemographics014JSON;
+        bounds_group.addLayer(json_SubzoneDemographics014JSON);
+        feature_group.addLayer(json_SubzoneDemographics014JSON);
+        function pop_SubzoneDemographicsTotal(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_2</th><td>' + (feature.properties['DensityP_2'] !== null ? Autolinker.link(String(feature.properties['DensityP_2'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function doStyleSubzoneDemographicsTotal(feature) {
+        if (feature.properties.DensityP_2 >= 0.0 &&
+                feature.properties.DensityP_2 <= 20.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#f7fcf5',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_2 >= 20.0 &&
+                feature.properties.DensityP_2 <= 1380.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#c9e9c2',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_2 >= 1380.0 &&
+                feature.properties.DensityP_2 <= 9820.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#7ac77b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_2 >= 9820.0 &&
+                feature.properties.DensityP_2 <= 25530.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#29924a',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_2 >= 25530.0 &&
+                feature.properties.DensityP_2 <= 138500.0) {
+
+            return {
+                color: '#000000',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '0.65',
+                fillOpacity: '0.65',
+            }
+        }
+        }
+            var json_SubzoneDemographicsTotalJSON = new L.geoJson(json_SubzoneDemographicsTotal, {
+                onEachFeature: pop_SubzoneDemographicsTotal,
+                style: doStyleSubzoneDemographicsTotal
+            });
+            layerOrder[layerOrder.length] = json_SubzoneDemographicsTotalJSON;
+        bounds_group.addLayer(json_SubzoneDemographicsTotalJSON);
+        feature_group.addLayer(json_SubzoneDemographicsTotalJSON);
+        function pop_MRTLines(feature, layer) {
+        }
+
+        function doStyleMRTLines(feature) {
+			switch (feature.properties.name) {
+                default:
+                    return {
+                    color: '#7be669',
+                    weight: '4.0',
+                    dashArray: '',
+                    lineCap: 'square',
+                    lineJoin: 'bevel',
+                    opacity: '0.9',
+                };
+                break;
+
+                case 'Circle Line Extension':
+                    return {
+                    color: '#e19312',
+                    weight: '4.0',
+                    dashArray: '',
+                    lineCap: 'square',
+                    lineJoin: 'bevel',
+                    opacity: '0.9',
+                };
+                break;
+
+                case 'Circle Line MRT':
+                    return {
+                    color: '#e19312',
+                    weight: '4.0',
+                    dashArray: '',
+                    lineCap: 'square',
+                    lineJoin: 'bevel',
+                    opacity: '0.9',
+                };
+                break;
+
+                case 'Downtown Line MRT':
+                    return {
+                    color: '#0b59a4',
+                    weight: '4.0',
+                    dashArray: '',
+                    lineCap: 'square',
+                    lineJoin: 'bevel',
+                    opacity: '0.9',
+                };
+                break;
+
+                case 'MRT East West Line (EW)':
+                    return {
+                    color: '#17944e',
+                    weight: '4.0',
+                    dashArray: '',
+                    lineCap: 'square',
+                    lineJoin: 'bevel',
+                    opacity: '0.9',
+                };
+                break;
+
+                case 'North East Line (NE)':
+                    return {
+                    color: '#7832ac',
+                    weight: '4.0',
+                    dashArray: '',
+                    lineCap: 'square',
+                    lineJoin: 'bevel',
+                    opacity: '0.9',
+                };
+                break;
+
+                case 'North South Line (NS)':
+                    return {
+                    color: '#e1423e',
+                    weight: '4.0',
+                    dashArray: '',
+                    lineCap: 'square',
+                    lineJoin: 'bevel',
+                    opacity: '0.9',
+                };
+                break;
+
+            }
+        }
+            var json_MRTLinesJSON = new L.geoJson(json_MRTLines, {
+                onEachFeature: pop_MRTLines,
+                style: doStyleMRTLines
+            });
+            layerOrder[layerOrder.length] = json_MRTLinesJSON;
+        bounds_group.addLayer(json_MRTLinesJSON);
+        function pop_LRTLines(feature, layer) {
+        }
+
+        function doStyleLRTLines(feature) {
+            return {
+                weight: 4.0,
+                color: '#87958a',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                opacity: 1.0
+            };
+        }
+            var json_LRTLinesJSON = new L.geoJson(json_LRTLines, {
+                onEachFeature: pop_LRTLines,
+                style: doStyleLRTLines
+            });
+            layerOrder[layerOrder.length] = json_LRTLinesJSON;
+        bounds_group.addLayer(json_LRTLinesJSON);
+        feature_group.addLayer(json_LRTLinesJSON);
+        function pop_a1proportionalcirclesrealisPOI(feature, layer) {
+        }
+
+        function doStylea1proportionalcirclesrealisPOI(feature) {
+        if (feature.properties.PNTCNT >= 1.0 &&
+                feature.properties.PNTCNT <= 4.0) {
+
+            return {
+                color: '#373737',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#fef0d9',
+                opacity: '0.85',
+                fillOpacity: '0.85',
+            }
+        }
+        if (feature.properties.PNTCNT >= 4.0 &&
+                feature.properties.PNTCNT <= 8.0) {
+
+            return {
+                color: '#373737',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#fdcc8a',
+                opacity: '0.85',
+                fillOpacity: '0.85',
+            }
+        }
+        if (feature.properties.PNTCNT >= 8.0 &&
+                feature.properties.PNTCNT <= 13.0) {
+
+            return {
+                color: '#373737',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#fc8d59',
+                opacity: '0.85',
+                fillOpacity: '0.85',
+            }
+        }
+        if (feature.properties.PNTCNT >= 13.0 &&
+                feature.properties.PNTCNT <= 22.0) {
+
+            return {
+                color: '#373737',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#e34a33',
+                opacity: '0.85',
+                fillOpacity: '0.85',
+            }
+        }
+        if (feature.properties.PNTCNT >= 22.0 &&
+                feature.properties.PNTCNT <= 37.0) {
+
+            return {
+                color: '#373737',
+                weight: '1.04',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#b30000',
+                opacity: '0.85',
+                fillOpacity: '0.85',
+            }
+        }
+        }
+            var json_a1proportionalcirclesrealisPOIJSON = new L.geoJson(json_a1proportionalcirclesrealisPOI, {
+                onEachFeature: pop_a1proportionalcirclesrealisPOI,
+                style: doStylea1proportionalcirclesrealisPOI
+            });
+            layerOrder[layerOrder.length] = json_a1proportionalcirclesrealisPOIJSON;
+        bounds_group.addLayer(json_a1proportionalcirclesrealisPOIJSON);
+        feature_group.addLayer(json_a1proportionalcirclesrealisPOIJSON);
+        raster_group.addTo(map);
+        feature_group.addTo(map);
+        var osmGeocoder = new L.Control.OSMGeocoder({
+            collapsed: false,
+            position: 'topright',
+            text: 'Search',
+        });
+        osmGeocoder.addTo(map);
+    var baseMaps = {};
+        L.control.layers({},{'a1proportionalcircles_realis_POI<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/a1proportionalcirclesrealisPOI_1000040000.png" />  1.0000 - 4.0000 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/a1proportionalcirclesrealisPOI_4000080000.png" />  4.0000 - 8.0000 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/a1proportionalcirclesrealisPOI_80000130000.png" />  8.0000 - 13.0000 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/a1proportionalcirclesrealisPOI_130000220000.png" />  13.0000 - 22.0000 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/a1proportionalcirclesrealisPOI_220000370000.png" />  22.0000 - 37.0000 <br />': json_a1proportionalcirclesrealisPOIJSON,'<img src="legend/LRTLines.png" /> LRT Lines': json_LRTLinesJSON,'MRT Lines<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/MRTLines_.png" /> <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/MRTLines_CircleLineExtension.png" /> Circle Line Extension<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/MRTLines_CircleLineMRT.png" /> Circle Line MRT<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/MRTLines_DowntownLineMRT.png" /> Downtown Line MRT<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/MRTLines_MRTEastWestLineEW.png" /> MRT East West Line (EW)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/MRTLines_NorthEastLineNE.png" /> North East Line (NE)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/MRTLines_NorthSouthLineNS.png" /> North South Line (NS)<br />': json_MRTLinesJSON,'Subzone_Demographics Total<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographicsTotal_020.png" />  0 - 20 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographicsTotal_201380.png" />  20 - 1380 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographicsTotal_13809820.png" />  1380 - 9820 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographicsTotal_982025530.png" />  9820 - 25530 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographicsTotal_25530138500.png" />  25530 - 138500 <br />': json_SubzoneDemographicsTotalJSON,'Subzone_Demographics 0-14<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics014_01020.png" />  0 - 1020 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics014_10203390.png" />  1020 - 3390 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics014_33907110.png" />  3390 - 7110 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics014_711013480.png" />  7110 - 13480 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics014_1348019140.png" />  13480 - 19140 <br />': json_SubzoneDemographics014JSON,'Subzone_Demographics 15-24<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics1524_01560.png" />  0 - 1560 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics1524_15604480.png" />  1560 - 4480 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics1524_44808190.png" />  4480 - 8190 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics1524_819014760.png" />  8190 - 14760 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics1524_1476021290.png" />  14760 - 21290 <br />': json_SubzoneDemographics1524JSON,'Subzone_Demographics 25-54<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics2554_03170.png" />  0 - 3170 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics2554_317010650.png" />  3170 - 10650 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics2554_1065021790.png" />  10650 - 21790 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics2554_2179037780.png" />  21790 - 37780 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics2554_3778062060.png" />  37780 - 62060 <br />': json_SubzoneDemographics2554JSON,'Subzone_Demographics 55 - 64<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics5564_0950.png" />  0 - 950 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics5564_9502940.png" />  950 - 2940 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics5564_29406060.png" />  2940 - 6060 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics5564_606013240.png" />  6060 - 13240 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics5564_1324021640.png" />  13240 - 21640 <br />': json_SubzoneDemographics5564JSON,'Subzone_Demographics 65 & Older<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics65Older_0780.png" />  0 - 780 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics65Older_7802170.png" />  780 - 2170 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics65Older_21704000.png" />  2170 - 4000 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics65Older_40008410.png" />  4000 - 8410 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/SubzoneDemographics65Older_841014350.png" />  8410 - 14350 <br />': json_SubzoneDemographics65OlderJSON,'<img src="legend/Groceries.png" /> Groceries': json_GroceriesJSON,'<img src="legend/Childcare.png" /> Childcare': json_ChildcareJSON,'<img src="legend/Eldercare.png" /> Eldercare': json_EldercareJSON,'<img src="legend/Clinics.png" /> Clinics': json_ClinicsJSON,'<img src="legend/Education.png" /> Education': json_EducationJSON,'<img src="legend/Transport.png" /> Transport': json_TransportJSON,},{collapsed:false}).addTo(map);
+        L.control.scale({options: {position: 'bottomleft', maxWidth: 100, metric: true, imperial: false, updateWhenIdle: false}}).addTo(map);
+        stackLayers();
+    </script>
+    
+    
+  </body>
+</html>
