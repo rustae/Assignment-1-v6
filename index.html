@@ -97,30 +97,8 @@
         }
         map.on('overlayadd', restackLayers);
         layerControl = L.control.layers({},{},{collapsed:false});
-        function pop_Transport(feature, layer) {
-        }
-
-        var svgTransport = L.icon({
-            iconUrl: 'markers/transport_train_station2.svg',
-            iconSize: [19.76, 19.76], // size of the icon
-        });
-
-        function doStyleTransport() {
-            return {
-                icon: svgTransport
-            }
-        }
-        function doPointToLayerTransport(feature, latlng) {
-            return L.marker(latlng, doStyleTransport())
-        }
-        var json_TransportJSON = new L.geoJson(json_Transport, {
-            onEachFeature: pop_Transport, 
-            pointToLayer: doPointToLayerTransport
-            });
-        layerOrder[layerOrder.length] = json_TransportJSON;
-
-        bounds_group.addLayer(json_TransportJSON);
-        feature_group.addLayer(json_TransportJSON);
+		
+		//Education
         function pop_Education(feature, layer) {
         }
 
@@ -145,6 +123,8 @@
 
         bounds_group.addLayer(json_EducationJSON);
         feature_group.addLayer(json_EducationJSON);
+		
+		//Clinics
         function pop_Clinics(feature, layer) {
         }
 
@@ -169,6 +149,8 @@
 
         bounds_group.addLayer(json_ClinicsJSON);
         feature_group.addLayer(json_ClinicsJSON);
+		
+		//Eldercare
         function pop_Eldercare(feature, layer) {
         }
 
@@ -193,6 +175,8 @@
 
         bounds_group.addLayer(json_EldercareJSON);
         feature_group.addLayer(json_EldercareJSON);
+		
+		// Childcare
         function pop_Childcare(feature, layer) {
         }
 
@@ -217,6 +201,8 @@
 
         bounds_group.addLayer(json_ChildcareJSON);
         feature_group.addLayer(json_ChildcareJSON);
+		
+		// Groceries 
         function pop_Groceries(feature, layer) {
         }
 
@@ -241,510 +227,119 @@
 
         bounds_group.addLayer(json_GroceriesJSON);
         feature_group.addLayer(json_GroceriesJSON);
-        function pop_SubzoneDemographics65Older(feature, layer) {
-            var popupContent = '<table><tr><th scope="row">DensityP_7</th><td>' + (feature.properties['DensityP_7'] !== null ? Autolinker.link(String(feature.properties['DensityP_7'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
-            layer.bindPopup(popupContent);
+		
+		// Proportional Symbol Circles	
+        function pop_a1proportionalcirclesrealisPOI(feature, layer) {
         }
 
-        function doStyleSubzoneDemographics65Older(feature) {
-        if (feature.properties.DensityP_7 >= 0.0 &&
-                feature.properties.DensityP_7 <= 780.0) {
+        function doStylea1proportionalcirclesrealisPOI(feature) {
+        if (feature.properties.PNTCNT >= 1.0 &&
+                feature.properties.PNTCNT <= 4.0) {
 
             return {
-                color: '#000000',
+                color: '#373737',
                 weight: '1.04',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                fillColor: '#f7fcf5',
-                opacity: '0.65',
-                fillOpacity: '0.65',
+                fillColor: '#fef0d9',
+                opacity: '0.85',
+                fillOpacity: '0.85',
             }
         }
-        if (feature.properties.DensityP_7 >= 780.0 &&
-                feature.properties.DensityP_7 <= 2170.0) {
+        if (feature.properties.PNTCNT >= 4.0 &&
+                feature.properties.PNTCNT <= 8.0) {
 
             return {
-                color: '#000000',
+                color: '#373737',
                 weight: '1.04',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                fillColor: '#c9e9c2',
-                opacity: '0.65',
-                fillOpacity: '0.65',
+                fillColor: '#fdcc8a',
+                opacity: '0.85',
+                fillOpacity: '0.85',
             }
         }
-        if (feature.properties.DensityP_7 >= 2170.0 &&
-                feature.properties.DensityP_7 <= 4000.0) {
+        if (feature.properties.PNTCNT >= 8.0 &&
+                feature.properties.PNTCNT <= 13.0) {
 
             return {
-                color: '#000000',
+                color: '#373737',
                 weight: '1.04',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                fillColor: '#7ac77b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
+                fillColor: '#fc8d59',
+                opacity: '0.85',
+                fillOpacity: '0.85',
             }
         }
-        if (feature.properties.DensityP_7 >= 4000.0 &&
-                feature.properties.DensityP_7 <= 8410.0) {
+        if (feature.properties.PNTCNT >= 13.0 &&
+                feature.properties.PNTCNT <= 22.0) {
 
             return {
-                color: '#000000',
+                color: '#373737',
                 weight: '1.04',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                fillColor: '#29924a',
-                opacity: '0.65',
-                fillOpacity: '0.65',
+                fillColor: '#e34a33',
+                opacity: '0.85',
+                fillOpacity: '0.85',
             }
         }
-        if (feature.properties.DensityP_7 >= 8410.0 &&
-                feature.properties.DensityP_7 <= 14350.0) {
+        if (feature.properties.PNTCNT >= 22.0 &&
+                feature.properties.PNTCNT <= 37.0) {
 
             return {
-                color: '#000000',
+                color: '#373737',
                 weight: '1.04',
                 dashArray: '',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                fillColor: '#00441b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
+                fillColor: '#b30000',
+                opacity: '0.85',
+                fillOpacity: '0.85',
             }
         }
         }
-            var json_SubzoneDemographics65OlderJSON = new L.geoJson(json_SubzoneDemographics65Older, {
-                onEachFeature: pop_SubzoneDemographics65Older,
-                style: doStyleSubzoneDemographics65Older
+            var json_a1proportionalcirclesrealisPOIJSON = new L.geoJson(json_a1proportionalcirclesrealisPOI, {
+                onEachFeature: pop_a1proportionalcirclesrealisPOI,
+                style: doStylea1proportionalcirclesrealisPOI
             });
-            layerOrder[layerOrder.length] = json_SubzoneDemographics65OlderJSON;
-        bounds_group.addLayer(json_SubzoneDemographics65OlderJSON);
-        feature_group.addLayer(json_SubzoneDemographics65OlderJSON);
-        function pop_SubzoneDemographics5564(feature, layer) {
-            var popupContent = '<table><tr><th scope="row">DensityP_6</th><td>' + (feature.properties['DensityP_6'] !== null ? Autolinker.link(String(feature.properties['DensityP_6'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
-            layer.bindPopup(popupContent);
+            layerOrder[layerOrder.length] = json_a1proportionalcirclesrealisPOIJSON;
+        bounds_group.addLayer(json_a1proportionalcirclesrealisPOIJSON);
+        feature_group.addLayer(json_a1proportionalcirclesrealisPOIJSON);
+			
+		
+		//Transport
+        function pop_Transport(feature, layer) {
         }
 
-        function doStyleSubzoneDemographics5564(feature) {
-        if (feature.properties.DensityP_6 >= 0.0 &&
-                feature.properties.DensityP_6 <= 950.0) {
+        var svgTransport = L.icon({
+            iconUrl: 'markers/transport_train_station2.svg',
+            iconSize: [19.76, 19.76], // size of the icon
+        });
 
+        function doStyleTransport() {
             return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#f7fcf5',
-                opacity: '0.65',
-                fillOpacity: '0.65',
+                icon: svgTransport
             }
         }
-        if (feature.properties.DensityP_6 >= 950.0 &&
-                feature.properties.DensityP_6 <= 2940.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#c9e9c2',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
+        function doPointToLayerTransport(feature, latlng) {
+            return L.marker(latlng, doStyleTransport())
         }
-        if (feature.properties.DensityP_6 >= 2940.0 &&
-                feature.properties.DensityP_6 <= 6060.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#7ac77b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_6 >= 6060.0 &&
-                feature.properties.DensityP_6 <= 13240.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#29924a',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_6 >= 13240.0 &&
-                feature.properties.DensityP_6 <= 21640.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#00441b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        }
-            var json_SubzoneDemographics5564JSON = new L.geoJson(json_SubzoneDemographics5564, {
-                onEachFeature: pop_SubzoneDemographics5564,
-                style: doStyleSubzoneDemographics5564
+        var json_TransportJSON = new L.geoJson(json_Transport, {
+            onEachFeature: pop_Transport, 
+            pointToLayer: doPointToLayerTransport
             });
-            layerOrder[layerOrder.length] = json_SubzoneDemographics5564JSON;
-        bounds_group.addLayer(json_SubzoneDemographics5564JSON);
-        feature_group.addLayer(json_SubzoneDemographics5564JSON);
-        function pop_SubzoneDemographics2554(feature, layer) {
-            var popupContent = '<table><tr><th scope="row">DensityP_5</th><td>' + (feature.properties['DensityP_5'] !== null ? Autolinker.link(String(feature.properties['DensityP_5'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
-            layer.bindPopup(popupContent);
-        }
+        layerOrder[layerOrder.length] = json_TransportJSON;
 
-        function doStyleSubzoneDemographics2554(feature) {
-        if (feature.properties.DensityP_5 >= 0.0 &&
-                feature.properties.DensityP_5 <= 3170.0) {
+        bounds_group.addLayer(json_TransportJSON);
+        feature_group.addLayer(json_TransportJSON);
 
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#f7fcf5',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_5 >= 3170.0 &&
-                feature.properties.DensityP_5 <= 10650.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#c9e9c2',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_5 >= 10650.0 &&
-                feature.properties.DensityP_5 <= 21790.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#7ac77b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_5 >= 21790.0 &&
-                feature.properties.DensityP_5 <= 37780.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#29924a',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_5 >= 37780.0 &&
-                feature.properties.DensityP_5 <= 62060.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#00441b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        }
-            var json_SubzoneDemographics2554JSON = new L.geoJson(json_SubzoneDemographics2554, {
-                onEachFeature: pop_SubzoneDemographics2554,
-                style: doStyleSubzoneDemographics2554
-            });
-            layerOrder[layerOrder.length] = json_SubzoneDemographics2554JSON;
-        bounds_group.addLayer(json_SubzoneDemographics2554JSON);
-        feature_group.addLayer(json_SubzoneDemographics2554JSON);
-        function pop_SubzoneDemographics1524(feature, layer) {
-            var popupContent = '<table><tr><th scope="row">DensityP_4</th><td>' + (feature.properties['DensityP_4'] !== null ? Autolinker.link(String(feature.properties['DensityP_4'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
-            layer.bindPopup(popupContent);
-        }
-
-        function doStyleSubzoneDemographics1524(feature) {
-        if (feature.properties.DensityP_4 >= 0.0 &&
-                feature.properties.DensityP_4 <= 1560.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#f7fcf5',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_4 >= 1560.0 &&
-                feature.properties.DensityP_4 <= 4480.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#c9e9c2',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_4 >= 4480.0 &&
-                feature.properties.DensityP_4 <= 8190.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#7ac77b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_4 >= 8190.0 &&
-                feature.properties.DensityP_4 <= 14760.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#29924a',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_4 >= 14760.0 &&
-                feature.properties.DensityP_4 <= 21290.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#00441b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        }
-            var json_SubzoneDemographics1524JSON = new L.geoJson(json_SubzoneDemographics1524, {
-                onEachFeature: pop_SubzoneDemographics1524,
-                style: doStyleSubzoneDemographics1524
-            });
-            layerOrder[layerOrder.length] = json_SubzoneDemographics1524JSON;
-        bounds_group.addLayer(json_SubzoneDemographics1524JSON);
-        feature_group.addLayer(json_SubzoneDemographics1524JSON);
-        function pop_SubzoneDemographics014(feature, layer) {
-            var popupContent = '<table><tr><th scope="row">DensityP_3</th><td>' + (feature.properties['DensityP_3'] !== null ? Autolinker.link(String(feature.properties['DensityP_3'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
-            layer.bindPopup(popupContent);
-        }
-
-        function doStyleSubzoneDemographics014(feature) {
-        if (feature.properties.DensityP_3 >= 0.0 &&
-                feature.properties.DensityP_3 <= 1020.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#f7fcf5',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_3 >= 1020.0 &&
-                feature.properties.DensityP_3 <= 3390.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#c9e9c2',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_3 >= 3390.0 &&
-                feature.properties.DensityP_3 <= 7110.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#7ac77b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_3 >= 7110.0 &&
-                feature.properties.DensityP_3 <= 13480.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#29924a',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_3 >= 13480.0 &&
-                feature.properties.DensityP_3 <= 19140.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#00441b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        }
-            var json_SubzoneDemographics014JSON = new L.geoJson(json_SubzoneDemographics014, {
-                onEachFeature: pop_SubzoneDemographics014,
-                style: doStyleSubzoneDemographics014
-            });
-            layerOrder[layerOrder.length] = json_SubzoneDemographics014JSON;
-        bounds_group.addLayer(json_SubzoneDemographics014JSON);
-        feature_group.addLayer(json_SubzoneDemographics014JSON);
-        function pop_SubzoneDemographicsTotal(feature, layer) {
-            var popupContent = '<table><tr><th scope="row">DensityP_2</th><td>' + (feature.properties['DensityP_2'] !== null ? Autolinker.link(String(feature.properties['DensityP_2'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
-            layer.bindPopup(popupContent);
-        }
-
-        function doStyleSubzoneDemographicsTotal(feature) {
-        if (feature.properties.DensityP_2 >= 0.0 &&
-                feature.properties.DensityP_2 <= 20.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#f7fcf5',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_2 >= 20.0 &&
-                feature.properties.DensityP_2 <= 1380.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#c9e9c2',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_2 >= 1380.0 &&
-                feature.properties.DensityP_2 <= 9820.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#7ac77b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_2 >= 9820.0 &&
-                feature.properties.DensityP_2 <= 25530.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#29924a',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        if (feature.properties.DensityP_2 >= 25530.0 &&
-                feature.properties.DensityP_2 <= 138500.0) {
-
-            return {
-                color: '#000000',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#00441b',
-                opacity: '0.65',
-                fillOpacity: '0.65',
-            }
-        }
-        }
-            var json_SubzoneDemographicsTotalJSON = new L.geoJson(json_SubzoneDemographicsTotal, {
-                onEachFeature: pop_SubzoneDemographicsTotal,
-                style: doStyleSubzoneDemographicsTotal
-            });
-            layerOrder[layerOrder.length] = json_SubzoneDemographicsTotalJSON;
-        bounds_group.addLayer(json_SubzoneDemographicsTotalJSON);
-        feature_group.addLayer(json_SubzoneDemographicsTotalJSON);
+	// MRT Lines
         function pop_MRTLines(feature, layer) {
         }
 
@@ -835,6 +430,8 @@
             });
             layerOrder[layerOrder.length] = json_MRTLinesJSON;
         bounds_group.addLayer(json_MRTLinesJSON);
+		
+		// LRT Lines
         function pop_LRTLines(feature, layer) {
         }
 
@@ -855,88 +452,531 @@
             layerOrder[layerOrder.length] = json_LRTLinesJSON;
         bounds_group.addLayer(json_LRTLinesJSON);
         feature_group.addLayer(json_LRTLinesJSON);
-        function pop_a1proportionalcirclesrealisPOI(feature, layer) {
+
+		
+		// Subzone Demographics for Total Population	
+        function pop_SubzoneDemographicsTotal(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_2</th><td>' + (feature.properties['DensityP_2'] !== null ? Autolinker.link(String(feature.properties['DensityP_2'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
         }
 
-        function doStylea1proportionalcirclesrealisPOI(feature) {
-        if (feature.properties.PNTCNT >= 1.0 &&
-                feature.properties.PNTCNT <= 4.0) {
-
-            return {
-                color: '#373737',
-                weight: '1.04',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                fillColor: '#fef0d9',
-                opacity: '0.85',
-                fillOpacity: '0.85',
-            }
-        }
-        if (feature.properties.PNTCNT >= 4.0 &&
-                feature.properties.PNTCNT <= 8.0) {
+        function doStyleSubzoneDemographicsTotal(feature) {
+        if (feature.properties.DensityP_2 >= 0.0 &&
+                feature.properties.DensityP_2 <= 20.0) {
 
             return {
-                color: '#373737',
-                weight: '1.04',
-                dashArray: '',
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                fillColor: '#fdcc8a',
-                opacity: '0.85',
-                fillOpacity: '0.85',
+                fillColor: '#f7fcf5',
+                opacity: '1',
+                fillOpacity: '0.65',
             }
         }
-        if (feature.properties.PNTCNT >= 8.0 &&
-                feature.properties.PNTCNT <= 13.0) {
+        if (feature.properties.DensityP_2 >= 20.0 &&
+                feature.properties.DensityP_2 <= 1380.0) {
 
             return {
-                color: '#373737',
-                weight: '1.04',
-                dashArray: '',
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                fillColor: '#fc8d59',
-                opacity: '0.85',
-                fillOpacity: '0.85',
+                fillColor: '#c9e9c2',
+                opacity: '1',
+                fillOpacity: '0.65',
             }
         }
-        if (feature.properties.PNTCNT >= 13.0 &&
-                feature.properties.PNTCNT <= 22.0) {
+        if (feature.properties.DensityP_2 >= 1380.0 &&
+                feature.properties.DensityP_2 <= 9820.0) {
 
             return {
-                color: '#373737',
-                weight: '1.04',
-                dashArray: '',
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                fillColor: '#e34a33',
-                opacity: '0.85',
-                fillOpacity: '0.85',
+                fillColor: '#7ac77b',
+                opacity: '1',
+                fillOpacity: '0.65',
             }
         }
-        if (feature.properties.PNTCNT >= 22.0 &&
-                feature.properties.PNTCNT <= 37.0) {
+        if (feature.properties.DensityP_2 >= 9820.0 &&
+                feature.properties.DensityP_2 <= 25530.0) {
 
             return {
-                color: '#373737',
-                weight: '1.04',
-                dashArray: '',
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
                 lineCap: 'butt',
                 lineJoin: 'miter',
-                fillColor: '#b30000',
-                opacity: '0.85',
-                fillOpacity: '0.85',
+                fillColor: '#29924a',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_2 >= 25530.0 &&
+                feature.properties.DensityP_2 <= 138500.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '1',
+                fillOpacity: '0.65',
             }
         }
         }
-            var json_a1proportionalcirclesrealisPOIJSON = new L.geoJson(json_a1proportionalcirclesrealisPOI, {
-                onEachFeature: pop_a1proportionalcirclesrealisPOI,
-                style: doStylea1proportionalcirclesrealisPOI
+            var json_SubzoneDemographicsTotalJSON = new L.geoJson(json_SubzoneDemographicsTotal, {
+                onEachFeature: pop_SubzoneDemographicsTotal,
+                style: doStyleSubzoneDemographicsTotal
             });
-            layerOrder[layerOrder.length] = json_a1proportionalcirclesrealisPOIJSON;
-        bounds_group.addLayer(json_a1proportionalcirclesrealisPOIJSON);
-        feature_group.addLayer(json_a1proportionalcirclesrealisPOIJSON);
+            layerOrder[layerOrder.length] = json_SubzoneDemographicsTotalJSON;
+        bounds_group.addLayer(json_SubzoneDemographicsTotalJSON);
+        feature_group.addLayer(json_SubzoneDemographicsTotalJSON);
+
+		// Subzone Demograpics of 0 - 14 years old
+        function pop_SubzoneDemographics014(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_3</th><td>' + (feature.properties['DensityP_3'] !== null ? Autolinker.link(String(feature.properties['DensityP_3'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function doStyleSubzoneDemographics014(feature) {
+        if (feature.properties.DensityP_3 >= 0.0 &&
+                feature.properties.DensityP_3 <= 1020.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#f7fcf5',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_3 >= 1020.0 &&
+                feature.properties.DensityP_3 <= 3390.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#c9e9c2',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_3 >= 3390.0 &&
+                feature.properties.DensityP_3 <= 7110.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#7ac77b',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_3 >= 7110.0 &&
+                feature.properties.DensityP_3 <= 13480.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#29924a',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_3 >= 13480.0 &&
+                feature.properties.DensityP_3 <= 19140.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        }
+            var json_SubzoneDemographics014JSON = new L.geoJson(json_SubzoneDemographics014, {
+                onEachFeature: pop_SubzoneDemographics014,
+                style: doStyleSubzoneDemographics014
+            });
+            layerOrder[layerOrder.length] = json_SubzoneDemographics014JSON;
+        bounds_group.addLayer(json_SubzoneDemographics014JSON);
+        feature_group.addLayer(json_SubzoneDemographics014JSON);
+		
+		
+		
+		// Subzone Demographics of 15 - 24 years old
+        function pop_SubzoneDemographics1524(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_4</th><td>' + (feature.properties['DensityP_4'] !== null ? Autolinker.link(String(feature.properties['DensityP_4'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function doStyleSubzoneDemographics1524(feature) {
+        if (feature.properties.DensityP_4 >= 0.0 &&
+                feature.properties.DensityP_4 <= 1560.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#f7fcf5',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_4 >= 1560.0 &&
+                feature.properties.DensityP_4 <= 4480.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#c9e9c2',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_4 >= 4480.0 &&
+                feature.properties.DensityP_4 <= 8190.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#7ac77b',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_4 >= 8190.0 &&
+                feature.properties.DensityP_4 <= 14760.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#29924a',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_4 >= 14760.0 &&
+                feature.properties.DensityP_4 <= 21290.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        }
+            var json_SubzoneDemographics1524JSON = new L.geoJson(json_SubzoneDemographics1524, {
+                onEachFeature: pop_SubzoneDemographics1524,
+                style: doStyleSubzoneDemographics1524
+            });
+            layerOrder[layerOrder.length] = json_SubzoneDemographics1524JSON;
+        bounds_group.addLayer(json_SubzoneDemographics1524JSON);
+        feature_group.addLayer(json_SubzoneDemographics1524JSON);
+
+
+		// Subzone Demographics from 25 - 54 years old 
+        function pop_SubzoneDemographics2554(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_5</th><td>' + (feature.properties['DensityP_5'] !== null ? Autolinker.link(String(feature.properties['DensityP_5'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function doStyleSubzoneDemographics2554(feature) {
+        if (feature.properties.DensityP_5 >= 0.0 &&
+                feature.properties.DensityP_5 <= 3170.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#f7fcf5',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_5 >= 3170.0 &&
+                feature.properties.DensityP_5 <= 10650.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#c9e9c2',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_5 >= 10650.0 &&
+                feature.properties.DensityP_5 <= 21790.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#7ac77b',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_5 >= 21790.0 &&
+                feature.properties.DensityP_5 <= 37780.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#29924a',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_5 >= 37780.0 &&
+                feature.properties.DensityP_5 <= 62060.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        }
+            var json_SubzoneDemographics2554JSON = new L.geoJson(json_SubzoneDemographics2554, {
+                onEachFeature: pop_SubzoneDemographics2554,
+                style: doStyleSubzoneDemographics2554
+            });
+            layerOrder[layerOrder.length] = json_SubzoneDemographics2554JSON;
+        bounds_group.addLayer(json_SubzoneDemographics2554JSON);
+        feature_group.addLayer(json_SubzoneDemographics2554JSON);
+		
+		
+		// Subzone Demographics for 55 - 64 years old	
+        function pop_SubzoneDemographics5564(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_6</th><td>' + (feature.properties['DensityP_6'] !== null ? Autolinker.link(String(feature.properties['DensityP_6'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function doStyleSubzoneDemographics5564(feature) {
+        if (feature.properties.DensityP_6 >= 0.0 &&
+                feature.properties.DensityP_6 <= 950.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#f7fcf5',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_6 >= 950.0 &&
+                feature.properties.DensityP_6 <= 2940.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#c9e9c2',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_6 >= 2940.0 &&
+                feature.properties.DensityP_6 <= 6060.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#7ac77b',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_6 >= 6060.0 &&
+                feature.properties.DensityP_6 <= 13240.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#29924a',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_6 >= 13240.0 &&
+                feature.properties.DensityP_6 <= 21640.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        }
+            var json_SubzoneDemographics5564JSON = new L.geoJson(json_SubzoneDemographics5564, {
+                onEachFeature: pop_SubzoneDemographics5564,
+                style: doStyleSubzoneDemographics5564
+            });
+            layerOrder[layerOrder.length] = json_SubzoneDemographics5564JSON;
+        bounds_group.addLayer(json_SubzoneDemographics5564JSON);
+        feature_group.addLayer(json_SubzoneDemographics5564JSON);
+		
+		
+		// Subzone Demographics for 65 years and over - Choropleth Map	
+        function pop_SubzoneDemographics65Older(feature, layer) {
+            var popupContent = '<table><tr><th scope="row">DensityP_7</th><td>' + (feature.properties['DensityP_7'] !== null ? Autolinker.link(String(feature.properties['DensityP_7'])) : '') + '</td></tr><tr><th scope="row">REGION_N</th><td>' + (feature.properties['REGION_N'] !== null ? Autolinker.link(String(feature.properties['REGION_N'])) : '') + '</td></tr></table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function doStyleSubzoneDemographics65Older(feature) {
+        if (feature.properties.DensityP_7 >= 0.0 &&
+                feature.properties.DensityP_7 <= 780.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#f7fcf5',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_7 >= 780.0 &&
+                feature.properties.DensityP_7 <= 2170.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#c9e9c2',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_7 >= 2170.0 &&
+                feature.properties.DensityP_7 <= 4000.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#7ac77b',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_7 >= 4000.0 &&
+                feature.properties.DensityP_7 <= 8410.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#29924a',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        if (feature.properties.DensityP_7 >= 8410.0 &&
+                feature.properties.DensityP_7 <= 14350.0) {
+
+            return {
+                color: '#ffffff',
+                weight: '2',
+                dashArray: '3',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                fillColor: '#00441b',
+                opacity: '1',
+                fillOpacity: '0.65',
+            }
+        }
+        }
+            var json_SubzoneDemographics65OlderJSON = new L.geoJson(json_SubzoneDemographics65Older, {
+                onEachFeature: pop_SubzoneDemographics65Older,
+                style: doStyleSubzoneDemographics65Older
+            });
+            layerOrder[layerOrder.length] = json_SubzoneDemographics65OlderJSON;
+        bounds_group.addLayer(json_SubzoneDemographics65OlderJSON);
+        feature_group.addLayer(json_SubzoneDemographics65OlderJSON);
+		
+
+		
         raster_group.addTo(map);
         feature_group.addTo(map);
         var osmGeocoder = new L.Control.OSMGeocoder({
