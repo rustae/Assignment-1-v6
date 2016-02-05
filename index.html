@@ -84,16 +84,7 @@
         layerControl = L.control.layers({},{},{collapsed:false});
 		
 		// Base Map
-		window.onload = function () { 
-			var map = L.Map('map', {
-			center: L.LatLng(1.355312, 103.827068),
-			zoom: 13
-			});
-		
-			L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-				attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-			}).addTo(map);
-		};
+
 		
 		//Education - Point Symbol
         function pop_Education(feature, layer) {
