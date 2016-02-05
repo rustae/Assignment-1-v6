@@ -74,9 +74,7 @@
                 return this._bounds;
             }
         });
-        var map = L.map('map', {
-            zoomControl:true, maxZoom:28, minZoom:1
-        })
+
         var hash = new L.Hash(map);
         var additional_attrib = '<a href="https://github.com/tomchadwin/qgis2web" target ="_blank">qgis2web</a>';
         var feature_group = new L.featureGroup([]);
@@ -466,7 +464,7 @@
 		
 		// Subzone Demographics for Total Population	
         function pop_SubzoneDemographicsTotal(feature, layer) {
-            var popupContent = '<table><tr><th scope="row">DensityP_2</th><td>' + (feature.properties['DensityP_2'] !== null ? Autolinker.link(String(feature.properties['DensityP_2'])) : '') + '</td></tr><tr><th scope="row">Subzoone</th><td>' + (feature.properties['DensityP_1'] !== null ? Autolinker.link(String(feature.properties['DensityP_1'])) : '') + '</td></tr></table>';
+            var popupContent = '<table><tr><th scope="row">DensityP_2</th><td>' + (feature.properties['DensityP_2'] !== null ? Autolinker.link(String(feature.properties['DensityP_2'])) : '') + '</td></tr><tr><th scope="row">Subzone</th><td>' + (feature.properties['DensityP_1'] !== null ? Autolinker.link(String(feature.properties['DensityP_1'])) : '') + '</td></tr></table>';
             layer.bindPopup(popupContent);
         }
 
