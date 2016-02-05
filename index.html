@@ -8,33 +8,21 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     
     <link rel="stylesheet" href="css/leaflet.css" />
-    
     <link rel="stylesheet" type="text/css" href="css/qgis2web.css">
     <link rel="stylesheet" href="css/label.css" />
-    
     <link rel="stylesheet" href="css/MarkerCluster.css" />
-    <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
-    
+    <link rel="stylesheet" href="css/MarkerCluster.Default.css" />  
     <link rel="stylesheet" href=http://k4r573n.github.io/leaflet-control-osm-geocoder/Control.OSMGeocoder.css" />
+    <link rel="stylesheet" href="style/leaflet.awesome-markers.css"/>
     
-    
-    
-    
-    
-        <script src="js/leaflet.js"></script>
-    
-        <script src="js/leaflet-hash.js"></script>
-        <script src="js/label.js"></script>
-        <script src="js/Autolinker.min.js"></script>
-    
-    <script src="http://k4r573n.github.io/leaflet-control-osm-geocoder/Control.OSMGeocoder.js"></script>
-    
-    
-    
+    <script src="js/leaflet.awesome-markers.js"></script>
+    <script src="js/leaflet.js"></script>
+    <script src="js/leaflet-hash.js"></script>
+    <script src="js/label.js"></script>
+    <script src="js/Autolinker.min.js"></script>
+    <script src="http://k4r573n.github.io/leaflet-control-osm-geocoder/Control.OSMGeocoder.js"></script>  
     <script src="./resources/Autolinker.min.js"></script>
-    
-    
-        <script src="js/leaflet.markercluster.js"></script>
+	<script src="js/leaflet.markercluster.js"></script>
     
     
      
@@ -97,15 +85,14 @@
         layerControl = L.control.layers({},{},{collapsed:false});
 		
 		// Base Map
-        var map = new L.Map('map', {
-        center: new L.LatLng(1.355312, 103.827068),
-        zoom: 12
+        var map = L.Map('map', {
+        center: L.LatLng(1.355312, 103.827068),
+        zoom: 13
 		});
 		
-		var openStreeMapLayer;
-		openStreeMapLayer = L.tileLayer.grayscale('http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-        {
+       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
         });
 		
 		//Education - Point Symbol
