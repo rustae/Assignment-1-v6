@@ -37,9 +37,7 @@
     <title></title>
   </head>
   <body>
-    <div id="map">
-        
-    </div>
+    <div id="map"></div>
     
         <script src="data/json_Transport.js"></script>
         <script src="data/json_Education.js"></script>
@@ -56,6 +54,7 @@
         <script src="data/json_MRTLines.js"></script>
         <script src="data/json_LRTLines.js"></script>
         <script src="data/json_a1proportionalcirclesrealisPOI.js"></script>
+
         <script>
         L.ImageOverlay.include({
             getBounds: function () {
@@ -85,15 +84,16 @@
         layerControl = L.control.layers({},{},{collapsed:false});
 		
 		// Base Map
-        var map = L.Map('map', {
-        center: L.LatLng(1.355312, 103.827068),
-        zoom: 13
-		});
+		window.onload = function () { 
+			var map = L.Map('map', {
+			center: L.LatLng(1.355312, 103.827068),
+			zoom: 13
+			});
 		
-       L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
-        });
+			L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+				attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+			}).addTo(map);
+		};
 		
 		//Education - Point Symbol
         function pop_Education(feature, layer) {
